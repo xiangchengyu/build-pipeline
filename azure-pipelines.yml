@@ -16,7 +16,7 @@ stages:
       steps:
       - task: InstallShieldBuild@1
         inputs:
-          PrjName: 'P:\idk_installation\V12.2\Int\MVA\Unscrambler HSI\Unscrambler HSI.ism'
+          PrjName: 'F:\Perforce\idk_installation\V12.2\INT\MVA\Unscrambler HSI\Unscrambler HSI.ism'
           Parameters: '-v'
           AgentLoc: 'PrivateAgent'
           SABPath: 'G:\InstallShield'
