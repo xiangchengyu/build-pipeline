@@ -17,5 +17,6 @@ stages:
       - task: InstallShieldBuild@1
         inputs:
           PrjName: 'P:\idk_installation\V12.2\Int\MVA\Unscrambler HSI\Unscrambler HSI.ism'
+          Parameters: '-v'
           AgentLoc: 'PrivateAgent'
-          SABPath: 'G:\InstallShield\System\isdev.exe'
+          SABPath: 'G:\InstallShield'
