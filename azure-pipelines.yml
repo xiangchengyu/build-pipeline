@@ -1,0 +1,21 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  vmImage: ubuntu-latest
+
+stages:
+  - stage: build
+    jobs:
+    - job: build
+      steps:
+      - task: InstallShieldBuild@1
+        inputs:
+          PrjName: 'P:\idk_installation\V12.2\Int\MVA\Unscrambler HSI\Unscrambler HSI.ism'
+          AgentLoc: 'PrivateAgent'
+          SABPath: 'G:\InstallShield\System\isdev.exe'
