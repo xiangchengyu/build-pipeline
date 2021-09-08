@@ -19,4 +19,4 @@ stages:
           PrjName: 'Unscrambler HSI.ism'
           Parameters: '-v'
           AgentLoc: 'PrivateAgent'
-          SABPath: 'G:\InstallShield'
+          SABPath: 'C:\Program Files (x86)\InstallShield\2018'
