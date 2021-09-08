@@ -9,14 +9,10 @@ trigger:
 pool:
   vmImage: 'vs2017-win2016'
 
-stages:
-  - stage: build
-    jobs:
-    - job: build
-      steps:
-      - task: InstallShieldBuild@1
-        inputs:
-          PrjName: 'Unscrambler HSI.ism'
-          Parameters: '-v'
-          AgentLoc: 'PrivateAgent'
-          SABPath: 'C:\Program Files (x86)\InstallShield\2018'
+tasks:
+- task: InstallShieldBuild@1
+  inputs:
+    PrjName: 'Unscrambler HSI.ism'
+    AgentLoc: 'PrivateAgent'
+    SABPath: 'C:\Program Files (x86)\InstallShield\2018'
+
