@@ -10,9 +10,18 @@ pool:
   vmImage: 'vs2017-win2016'
 
 steps:
-- task: InstallShieldBuild@1
+- task: DotNetCoreCLI@2
+  displayName: 'build project'
   inputs:
-    PrjName: 'Unscrambler HSI.ism'
-    AgentLoc: 'PrivateAgent'
-    SABPath: 'C:\Program Files (x86)\InstallShield\2018'
+    command: 'build'
+    projects: './test.csproj'
+    arguments: '--no-restore --configuration Release'
 
+- task: UseDotNet@2
+  inputs:
+    packageType: 'sdk'
+    version: 
+
+- task: Npm@1
+  inputs:
+    command: 'ci'
