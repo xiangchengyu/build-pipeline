@@ -20,21 +20,24 @@ stages:
           runOnce:
             deploy:
               steps:
-                - task: AzurePowerShell@5
+                - task: AzureCLI@2
                   inputs:
                     azureSubscription: 'az devops connection'
-                    ScriptType: 'InlineScript'
-                    Inline: 'New-AzResourceGroup -Name testRG -Location EastUS'
-                    azurePowerShellVersion: 'LatestVersion'
-                - task: AzurePowerShell@5
+                    ScriptType: 'pscore'
+                    scriptLocation: 'inlineScript'
+                    inlineScript: 'New-AzResourceGroup -Name testRG -Location EastUS'
+
+                - task: AzureCLI@2
                   inputs:
                     azureSubscription: 'az devops connection'
-                    ScriptType: 'InlineScript'
-                    Inline: 'az bicep build --file $(Build.SourcesDirectory)\bicep\main.bicep'
-                    azurePowerShellVersion: 'LatestVersion'
-                - task: AzurePowerShell@5
+                    ScriptType: 'pscore'
+                    scriptLocation: 'inlineScript'
+                    inlineScript: 'az bicep build --file $(Build.SourcesDirectory)\bicep\main.bicep'
+                  
+                - task: AzureCLI@2
                   inputs:
                     azureSubscription: 'az devops connection'
-                    ScriptType: 'InlineScript'
-                    Inline: 'az deployment group create --template-file $(Build.SourcesDirectory)\bicep\main.bicep --parameters .\bicep\params\main.parameters.json --resource-group testRG'
-                    azurePowerShellVersion: 'LatestVersion'
+                    ScriptType: 'pscore'
+                    scriptLocation: 'inlineScript'
+                    inlineScript: 'az deployment group create --template-file $(Build.SourcesDirectory)\bicep\main.bicep --parameters .\bicep\params\main.parameters.json --resource-group testRG'
+                
