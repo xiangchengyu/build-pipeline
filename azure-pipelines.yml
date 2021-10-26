@@ -24,13 +24,13 @@ stages:
                 - task: AzureCLI@2
                   name: create_RG
                   inputs:
-                    azureSubscription: 'Visual Studio Enterprise Subscription'
+                    azureSubscription: 'az devops connection'
                     ScriptType: 'pscore'
                     scriptLocation: 'inlineScript'
                     inlineScript: 'az group create --name testRG --location eastus'
                 - task: AzureCLI@2
                   inputs:
-                    azureSubscription: 'Visual Studio Enterprise Subscription'
+                    azureSubscription: 'az devops connection'
                     scriptType: 'pscore'
                     scriptLocation: 'inlineScript'
                     inlineScript: 'az group list'
