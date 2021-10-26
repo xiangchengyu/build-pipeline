@@ -21,6 +21,7 @@ stages:
             deploy:
               steps:
                 - task: AzureCLI@2
+                  name: create_RG
                   inputs:
                     azureSubscription: 'az devops connection'
                     ScriptType: 'pscore'
