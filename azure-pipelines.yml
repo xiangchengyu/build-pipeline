@@ -30,11 +30,11 @@ stages:
                   inputs:
                     azureSubscription: 'az devops connection'
                     ScriptType: 'InlineScript'
-                    Inline: 'az bicep build --file .\bicep\main.bicep'
+                    Inline: 'az bicep build --file $(Build.SourcesDirectory)\bicep\main.bicep'
                     azurePowerShellVersion: 'LatestVersion'
                 - task: AzurePowerShell@5
                   inputs:
                     azureSubscription: 'az devops connection'
                     ScriptType: 'InlineScript'
-                    Inline: 'az deployment group create --template-file .\bicep\main.bicep --parameters .\bicep\params\main.parameters.json --resource-group testRG'
+                    Inline: 'az deployment group create --template-file $(Build.SourcesDirectory)\bicep\main.bicep --parameters .\bicep\params\main.parameters.json --resource-group testRG'
                     azurePowerShellVersion: 'LatestVersion'
