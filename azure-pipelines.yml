@@ -15,8 +15,8 @@ stages:
     
     jobs:
       - deployment: deploy_Azure_Vm
-        displayName: deploy Azure VM
-        environment: AzureDeployment
+        displayName: 'Deploy bicep to Azure'
+        environment: 'AzureDeployment'
         strategy:
           runOnce:
             deploy:
