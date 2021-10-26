@@ -31,14 +31,6 @@ stages:
                 - task: AzureCLI@2
                   inputs:
                     azureSubscription: 'az devops connection'
-                    ScriptType: 'pscore'
+                    scriptType: 'pscore'
                     scriptLocation: 'inlineScript'
-                    inlineScript: 'az bicep build --file $(Build.SourcesDirectory)\bicep\main.bicep'
-                  
-                - task: AzureCLI@2
-                  inputs:
-                    azureSubscription: 'az devops connection'
-                    ScriptType: 'pscore'
-                    scriptLocation: 'inlineScript'
-                    inlineScript: 'az deployment group create --template-file $(Build.SourcesDirectory)\bicep\main.bicep --parameters .\bicep\params\main.parameters.json --resource-group testRG'
-                
+                    inlineScript: 'az group list'
