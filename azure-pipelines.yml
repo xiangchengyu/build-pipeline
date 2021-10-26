@@ -27,7 +27,7 @@ stages:
                     azureSubscription: 'az devops connection'
                     ScriptType: 'pscore'
                     scriptLocation: 'inlineScript'
-                    inlineScript: 'New-AzResourceGroup -Name testRG -Location EastUS'
+                    inlineScript: 'az group create -Name testRG -Location EastUS'
                 - task: AzureCLI@2
                   inputs:
                     azureSubscription: 'az devops connection'
