@@ -6,11 +6,13 @@
 trigger:
 - master
 
+pool: 
+  vmImage: windows-latest
+
 stages:
   - stage: deploy
     displayName: deploy Azure Vm
-    pool: 
-      vmImage: windows-latest
+    
     jobs:
       - deployment: deploy_Azure_Vm
         displayName: deploy Azure VM
