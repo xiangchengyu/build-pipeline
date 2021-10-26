@@ -6,22 +6,35 @@
 trigger:
 - master
 
-pool:
-  vmImage: 'vs2017-win2016'
+stages:
+  - stage: deploy
+    displayName: deploy Azure Vm
+    pool: 
+      vmImage: windows-latest
+    jobs:
+      - deployment: deploy-Azure-Vm
+        displayName: deploy Azure VM
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - task: AzurePowerShell@5
+                  inputs:
+                    azureSubscription: 'az devops connection'
+                    ScriptType: 'InlineScript'
+                    Inline: 'New-AzResourceGroup -Name testRG -Location EastUS'
+                    azurePowerShellVersion: 'LatestVersion'
+                - task: AzureCLI@2
+                  inputs:
+                    azureSubscription: 'az devops connection'
+                    scriptType: 'ps'
+                    scriptLocation: 'inlineScript'
+                    inlineScript: 'az bicep build --file .\bicep\main.bicep'
+                - task: AzureCLI@2
+                  inputs:
+                    azureSubscription: 'az devops connection'
+                    scriptType: 'ps'
+                    scriptLocation: 'inlineScript'
+                    inlineScript: 'az deployment group create --template-file .\bicep\main.bicep --parameters .\bicep\params\main.parameters.json --resource-group testRG'
+'
 
-steps:
-- task: DotNetCoreCLI@2
-  displayName: 'build project'
-  inputs:
-    command: 'build'
-    projects: './test.csproj'
-    arguments: '--no-restore --configuration Release'
-
-- task: UseDotNet@2
-  inputs:
-    packageType: 'sdk'
-    version: 
-
-- task: Npm@1
-  inputs:
-    command: 'ci'
