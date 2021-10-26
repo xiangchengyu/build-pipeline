@@ -24,17 +24,16 @@ stages:
                     ScriptType: 'InlineScript'
                     Inline: 'New-AzResourceGroup -Name testRG -Location EastUS'
                     azurePowerShellVersion: 'LatestVersion'
-                - task: AzureCLI@2
+                - task: AzurePowerShell@5
                   inputs:
                     azureSubscription: 'az devops connection'
-                    scriptType: 'ps'
-                    scriptLocation: 'inlineScript'
-                    inlineScript: 'az bicep build --file .\bicep\main.bicep'
-                - task: AzureCLI@2
+                    ScriptType: 'InlineScript'
+                    Inline: 'az bicep build --file .\bicep\main.bicep'
+                    azurePowerShellVersion: 'LatestVersion'
+                - task: AzurePowerShell@5
                   inputs:
                     azureSubscription: 'az devops connection'
-                    scriptType: 'ps'
-                    scriptLocation: 'inlineScript'
-                    inlineScript: 'az deployment group create --template-file .\bicep\main.bicep --parameters .\bicep\params\main.parameters.json --resource-group testRG'
-'
-
+                    ScriptType: 'InlineScript'
+                    Inline: 'az deployment group create --template-file .\bicep\main.bicep --parameters .\bicep\params\main.parameters.json --resource-group testRG'
+                    azurePowerShellVersion: 'LatestVersion'
+                    
