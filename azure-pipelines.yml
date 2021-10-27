@@ -23,14 +23,15 @@ stages:
               steps:
                 - task: AzureCLI@2
                   inputs:
-                    azureSubscription: 'az devops connection'
+                    azureSubscription: 'AzDo-Connection'
                     scriptType: 'pscore'
                     scriptLocation: 'inlineScript'
                     inlineScript: 'az login -u xchy1427256@163.com -p Xchhhhhy@1998'
                 - task: AzureCLI@2
                   displayName: show group info
                   inputs:
-                    azureSubscription: 'az devops connection'
+                    azureSubscription: 'AzDo-Connection'
                     scriptType: 'pscore'
                     scriptLocation: 'inlineScript'
                     inlineScript: 'az group list'
+                
