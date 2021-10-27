@@ -22,13 +22,7 @@ stages:
             deploy:
               steps:
                 - task: AzureCLI@2
-                  name: create_RG
-                  inputs:
-                    azureSubscription: 'az devops connection'
-                    ScriptType: 'pscore'
-                    scriptLocation: 'inlineScript'
-                    inlineScript: 'az group create --name testRG --location eastus'
-                - task: AzureCLI@2
+                  displayName: show account info
                   inputs:
                     azureSubscription: 'az devops connection'
                     scriptType: 'pscore'
