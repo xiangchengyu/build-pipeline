@@ -26,11 +26,12 @@ stages:
             deploy:
               steps:
                 - task: CmdLine@2
+                  displayName: clone git repo
                   inputs:
                     script: 'git clone https://github.com/xiangchengyu/build-pipeline.git'
                     workingDirectory: '$(Build.SourcesDirectory)'
                 - task: AzureCLI@2
-                  displayName: crate resource group
+                  displayName: create resource group
                   inputs:
                     azureSubscription: 'AzDo-Connection'
                     scriptType: 'pscore'
