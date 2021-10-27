@@ -9,7 +9,7 @@ trigger:
       - master
 
 pool: 
-  vmImage: ubuntu-latest
+  vmImage: windows-latest
 
 variables:
   rgName: 'newRG'
@@ -25,6 +25,10 @@ stages:
           runOnce:
             deploy:
               steps:
+                - task: CmdLine@2
+                  inputs:
+                    script: 'git clone https://github.com/xiangchengyu/build-pipeline.git'
+                    workingDirectory: '$(Build.SourcesDirectory)'
                 - task: AzureCLI@2
                   displayName: crate resource group
                   inputs:
@@ -38,12 +42,12 @@ stages:
                     azureSubscription: 'AzDo-Connection'
                     scriptType: 'pscore'
                     scriptLocation: 'inlineScript'
-                    inlineScript: 'az bicep build --file $(Build.Repository.LocalPath)/main.bicep'
+                    inlineScript: 'az bicep build --file $(Build.SourcesDirectory)/build-pipeline/main.bicep'
                 - task: AzureCLI@2
                   displayName: deploy bicep
                   inputs:
                     azureSubscription: 'AzDo-Connection'
                     scriptType: 'pscore'
                     scriptLocation: 'inlineScript'
-                    inlineScript: 'az deployment group create --template-file $(Build.Repository.LocalPath)/main.bicep --parameters $(Build.SourcesDirectory)/params/main.parameters.json --resource-group $(rgName)'
+                    inlineScript: 'az deployment group create --template-file $(Build.SourcesDirectory)/build-pipeline/main.bicep --parameters $(Build.SourcesDirectory)/build-pipeline/params/main.parameters.json --resource-group $(rgName)'
                 
