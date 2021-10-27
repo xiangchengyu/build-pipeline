@@ -9,6 +9,9 @@ trigger:
 pool: 
   vmImage: windows-latest
 
+variables:
+  rgName: 'newRG'
+
 stages:
   - stage: deploy
     displayName: deploy Azure Vm
@@ -22,10 +25,26 @@ stages:
             deploy:
               steps:
                 - task: AzureCLI@2
-                  displayName: show group info
+                  displayName: crate resource group
                   inputs:
                     azureSubscription: 'AzDo-Connection'
                     scriptType: 'pscore'
                     scriptLocation: 'inlineScript'
-                    inlineScript: 'az group list'
+                    inlineScript: 'az group create --name $(rgName) --location eastus'
+                - task: AzureCLI@2
+                  displayName: build bicep
+                  inputs:
+                    azureSubscription: 'AzDo-Connection'
+                    scriptType: 'pscore'
+                    scriptLocation: 'inlineScript'
+                    inlineScript: 'az bicep build --file $(Build.SourcesDirectory)/main.bicep'
+                - task: AzureCLI@2
+                  inputs:
+                    azureSubscription: 'AzDo-Connection'
+                    scriptType: 'pscore'
+                    scriptLocation: 'inlineScript'
+                    inlineScript: |
+                      az deployment group create --template-file 
+                      $(Build.SourcesDirectory)/main.bicep --parameters 
+                      $(Build.SourcesDirectory)/params/main.parameters.json --resource-group $(rgName)
                 
