@@ -3,10 +3,10 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "resourceGroupName": {
-            "value": "testRG0"
+            "value": "newRG"
         },
         "namePrefix": {
-            "value": "test-"
+            "value": "new"
         },
         "vmUsername": {
             "value": "buildpart"
