@@ -33,4 +33,4 @@ stages:
                     azureSubscription: 'az devops connection'
                     scriptType: 'pscore'
                     scriptLocation: 'inlineScript'
-                    inlineScript: 'az group list'
+                    inlineScript: 'az account list'
