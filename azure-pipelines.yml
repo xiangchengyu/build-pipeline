@@ -4,10 +4,15 @@
 # https://aka.ms/yaml
 
 trigger:
-- master
+  branches:
+    include:
+      - master
+  paths:
+    
+  
 
 pool: 
-  vmImage: windows-latest
+  vmImage: ubuntu-latest
 
 variables:
   rgName: 'newRG'
