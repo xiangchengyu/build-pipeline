@@ -18,7 +18,6 @@ stages:
     
     jobs:
       - deployment: deploy_Azure_Vm
-        displayName: 'Deploy bicep to Azure'
         environment: 'testAzureDeployment'
         strategy:
           runOnce:
@@ -39,12 +38,10 @@ stages:
                     scriptLocation: 'inlineScript'
                     inlineScript: 'az bicep build --file $(Build.SourcesDirectory)/main.bicep'
                 - task: AzureCLI@2
+                  displayName: deploy bicep
                   inputs:
                     azureSubscription: 'AzDo-Connection'
                     scriptType: 'pscore'
                     scriptLocation: 'inlineScript'
-                    inlineScript: |
-                      az deployment group create --template-file 
-                      $(Build.SourcesDirectory)/main.bicep --parameters 
-                      $(Build.SourcesDirectory)/params/main.parameters.json --resource-group $(rgName)
+                    inlineScript: 'az deployment group create --template-file $(Build.SourcesDirectory)/main.bicep --parameters $(Build.SourcesDirectory)/params/main.parameters.json --resource-group $(rgName)'
                 
