@@ -29,7 +29,6 @@ stages:
                   displayName: clone git repo
                   inputs:
                     script: |
-                      rmdir build-pipeline
                       git clone https://github.com/xiangchengyu/build-pipeline.git
                     workingDirectory: '$(Build.SourcesDirectory)'
                 - task: AzureCLI@2
