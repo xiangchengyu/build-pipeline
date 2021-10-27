@@ -28,7 +28,9 @@ stages:
                 - task: CmdLine@2
                   displayName: clone git repo
                   inputs:
-                    script: 'git clone https://github.com/xiangchengyu/build-pipeline.git'
+                    script: |
+                      rmdir build-pipeline
+                      git clone https://github.com/xiangchengyu/build-pipeline.git
                     workingDirectory: '$(Build.SourcesDirectory)'
                 - task: AzureCLI@2
                   displayName: create resource group
